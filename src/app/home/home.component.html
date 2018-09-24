@@ -1,0 +1,9 @@
+<div *ngFor="let paquete of paquetes | async">
+   	<h1>{{paquete.name}}</h1>
+	<p>{{paquete.precio}}</p>
+</div>
+<div class="articulos">
+	<div *ngFor="let articulo of articulos | async">
+   		<h1>{{articulo.name}}</h1>  
+	</div>
+</div>

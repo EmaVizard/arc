@@ -1,0 +1,29 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+button{
+	border: 1px solid #dcdcdc;
+	background-color: white;
+	color: #666;
+	padding: 5px 20px;
+}
+.head{
+	display: flex;
+	border-bottom: 1px solid #dcdcdc;
+	padding: 10px;
+	align-items: center;
+	h1{
+		font-size: 14px;
+		margin: 0 10px;
+		vertical-align: middle;
+	}
+}
+.items{
+	margin: 20px auto;
+	display: block;
+	width: 400px;
+	padding: 20px;
+	border: 1px solid #dcdcdc;
+	list-style: none;
+}

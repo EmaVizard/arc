@@ -1,0 +1,94 @@
+<div *ngIf="user?.uid;else loginBox" class="head">
+  <button (click)="logout()">Logout</button>
+</div>
+
+<div *ngIf="isLoggedIn()">
+	<div class="items">
+        <!--------------------------------------- PAQUETES -->
+        <div class="paquetes-wrapper">
+            <h1>Paquetes</h1>
+
+            <div class="create-item"> 
+                <h2>Añadir Paquete</h2>     
+                <form [formGroup]="packForm" novalidate>
+                    <input formControlName="name" type="text" placeholder="Nombre" [ngClass]="{'is-success' : packForm.get('name').valid && packForm.get('name').dirty, 'is-danger' : !packForm.get('name').valid}">
+                    <input formControlName="desc"  type="text" placeholder="desc" [ngClass]="{'is-success' : packForm.get('desc').valid && packForm.get('desc').dirty, 'is-danger' : !packForm.get('desc').valid}">
+                    <input formControlName="price"  type="text" placeholder="precio" [ngClass]="{'is-success' : packForm.get('price').valid && packForm.get('price').dirty, 'is-danger' : !packForm.get('price').valid}">
+                    <div formArrayName="productos">
+                        <div class="check" *ngFor="let producto of productos.controls; let i=index" [formGroupName]="i">
+                            <select formControlName="name" (change)="cambio(producto.value.name)">
+                                <option>Selecciona un Producto</option>
+                                <option *ngFor="let art of articulos | async" value="{{art.name}}">{{art.name}}</option>
+                            </select>
+                        </div>
+                        <button (click)="addProducto()">Añadir</button>
+                    </div>
+                    <button (click)="startNewAdListing()">Test</button>
+                </form>
+                <button (click)="deleteEverything()">Delete All</button> 
+            </div>
+
+            <div class="list">                
+               <div class="paquetes" *ngFor="let paquete of paquetes | async">
+            	   <form novalidate>
+            	       	<p>{{paquete.name}}</p>
+                        
+            	       	<input type="text" placeholder="{{paquete.name}}">
+                        <input type="text" placeholder="{{paquete.price}}">
+                        <input type="text" placeholder="{{paquete.desc}}">
+            	       	<button (click)="updatePack(paquete.key, this.nam)">Update</button>
+            	       	<button (click)="deleteItem(paquete.key)">Delete</button>
+                        <!-- <div *ngFor="let producto of paquete.productos">
+                            <p>{{producto | json}}</p>
+                            <p >{{(producto).name}}</p>
+                            <button (click)="deleteProducto"></button>
+                        </div> -->
+                        <!-- <p>{{(paquete.productos[0]).name}}</p> -->
+            	   </form>
+            	</div>
+            </div>
+        </div>
+
+        <!--------------------------------------------------------- ARTICULOS -->
+        <div class="articulos-wrapper">            
+            <h1>Articulos</h1>
+
+            <div class="create-item articulos">
+                <h2>Añadir Articulo</h2>    
+                <form #newArt="ngForm">
+                    <input [(ngModel)]="newArt.name" name="name" id="name" type="text" placeholder="nombre">
+                    <input [(ngModel)]="newArt.precio" name="precio" type="text" placeholder="precio">
+                    <button (click)="addArt(newArt.name,newArt.precio)">Add</button>
+                    <!-- <button (click)="test(item.key, item.newText.name)">Test</button> -->
+                </form>
+                <button (click)="view(newCate)">view</button> 
+            </div>
+
+            <div class="list">                
+                <div class="articulos" *ngFor="let articulo of articulos | async">
+                   <form #updateArt="ngForm">
+                        <p>{{articulo.name}}</p>
+                        <p>{{articulo.precio}}</p>
+                        <input [(ngModel)]="updateArt.name" name="name" id="name" type="text" placeholder="{{articulo.name}}">
+                        <input [(ngModel)]="updateArt.src" name="src" type="text" placeholder={{articulo.precio}}>
+                        <button (click)="updateItem(articulo.key, updateArt.value)">Update</button>
+                        <button (click)="deleteItem(articulo.key)">Delete</button>
+                   </form>
+                </div>
+            </div>
+
+        </div>
+  	</div>  
+</div>
+
+<ng-template #loginBox>
+  <div>
+    <h1>Login to {{title}}</h1>    
+    <button (click)="loginWithGoogle()">Login with google</button>
+    <form #userForm="ngForm">
+      <input [(ngModel)]="userForm.email" type="text" name="email">
+      <input [(ngModel)]="userForm.password"  type="text" name="password">
+      <button (click)="login(userForm.email,userForm.password)">incio</button>
+    </form>
+  </div>
+</ng-template>
