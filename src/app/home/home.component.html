@@ -1,9 +1,21 @@
-<div *ngFor="let paquete of paquetes | async">
-   	<h1>{{paquete.name}}</h1>
-	<p>{{paquete.precio}}</p>
-</div>
-<div class="articulos">
-	<div *ngFor="let articulo of articulos | async">
-   		<h1>{{articulo.name}}</h1>  
-	</div>
-</div>
+<header>
+  <div class="container">
+    
+  </div>
+  <div class="menu">
+    <div class="container">      
+      <div class="logo">
+        <img src="../../assets/logo-b.svg">
+      </div>
+      <p>Inicio</p>
+      <p>Productos</p>
+      <p>Ofertas</p>
+      <p>Contacto</p>
+    </div>
+    
+  </div>
+</header>
+
+<app-slider></app-slider>
+<app-productos></app-productos>
+

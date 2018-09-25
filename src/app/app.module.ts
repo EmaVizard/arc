@@ -9,16 +9,19 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
 import { AuthService } from './shared/auth.service';
-import { ProductosService } from './shared/productos.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
+import { SliderComponent } from './slider/slider.component';
+import { ProductosComponent } from './productos/productos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
-    HomeComponent
+    HomeComponent,
+    SliderComponent,
+    ProductosComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService, ProductosService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

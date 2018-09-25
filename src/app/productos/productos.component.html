@@ -1,0 +1,17 @@
+
+<div id="productos">	
+	<div *ngFor="let paquete of paquetes | async">
+	   	<h1>{{paquete.name}}</h1>
+		<p>{{paquete.precio}}</p>
+	</div>
+	<div class="articulos">
+		<h1>Articulos</h1>
+		<div class="container">
+			<div class="articulo" *ngFor="let articulo of articulos | async">
+				<div class="img"></div>
+		   		<h1>{{articulo.name}}</h1>
+		   		<p>Precio: {{articulo.precio | currency}}</p>  
+			</div>
+		</div>
+	</div>
+</div>
